@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import {
 	createAuthUserWithEmailAndPassword,
 	createUserDocumentFromAuth,
@@ -6,7 +6,6 @@ import {
 import FormInput from '../FormInput/FormInput';
 import './SignUpForm.scss';
 import Button from '../Button/Button';
-import { UserContext } from '../../contexts/UserContext';
 
 const defaultFormFields = {
 	displayName: '',
@@ -18,8 +17,6 @@ const defaultFormFields = {
 const SignUpForm = () => {
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { displayName, email, password, confirmPassword } = formFields;
-
-	const { setCurrentUser } = useContext(UserContext);
 
 	const resetFormFields = () => setFormFields(defaultFormFields);
 
@@ -49,7 +46,6 @@ const SignUpForm = () => {
 			});
 			if (!userDocRef) throw new Error('Failed to get userDocRef');
 
-			setCurrentUser(userCredential.user);
 			resetFormFields();
 		} catch (error: any) {
 			if (error.code === 'auth/email-already-in-use') {

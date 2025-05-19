@@ -1,13 +1,11 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import './SignInForm.scss';
 import FormInput from '../FormInput/FormInput';
 import Button from '../Button/Button';
 import {
-	createUserDocumentFromAuth,
 	signInAuthUserWithEmailAndPassword,
 	signInWithGooglePopup,
 } from '../../utils/firebase/firebase.utils';
-import { UserContext } from '../../contexts/UserContext';
 
 const defaultFormFields = {
 	email: '',
@@ -17,8 +15,6 @@ const defaultFormFields = {
 const SignInForm = () => {
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { email, password } = formFields;
-
-	const { setCurrentUser } = useContext(UserContext);
 
 	const resetFormFields = () => setFormFields(defaultFormFields);
 
@@ -32,17 +28,8 @@ const SignInForm = () => {
 		event.preventDefault();
 
 		try {
-			const userCredential = await signInAuthUserWithEmailAndPassword(
-				email,
-				password
-			);
-			if (!userCredential)
-				throw new Error('Something went wrong getting user auth');
+			await signInAuthUserWithEmailAndPassword(email, password);
 
-			const userDocRef = await createUserDocumentFromAuth(userCredential.user);
-			if (!userDocRef) throw new Error('Failed to get userDocRef');
-
-			setCurrentUser(userCredential.user);
 			resetFormFields();
 		} catch (error: any) {
 			switch (error.code) {
@@ -59,14 +46,7 @@ const SignInForm = () => {
 
 	const handleGoogleSignIn = async () => {
 		try {
-			const userCredential = await signInWithGooglePopup();
-			if (!userCredential)
-				throw new Error('Something went wrong getting user auth');
-
-			const userDocRef = await createUserDocumentFromAuth(userCredential.user);
-			if (!userDocRef) throw new Error('Failed to get userDocRef');
-
-			setCurrentUser(userCredential.user);
+			await signInWithGooglePopup();
 		} catch (error) {
 			console.log('Failed to log in with Google', error);
 		}
