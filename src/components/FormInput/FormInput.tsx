@@ -5,7 +5,7 @@ export interface FormInputProps {
 	type: string;
 	name: string;
 	value: string;
-	onChange: React.Dispatch<React.SetStateAction<Object>>;
+	onChange: React.ChangeEventHandler<HTMLInputElement>;
 	required?: boolean;
 }
 

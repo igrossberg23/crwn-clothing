@@ -20,13 +20,13 @@ const SignUpForm = () => {
 
 	const resetFormFields = () => setFormFields(defaultFormFields);
 
-	const handleChange = (event: any) => {
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
 
 		setFormFields((prev) => ({ ...prev, [name]: value }));
 	};
 
-	const handleSubmit = async (event: React.FormEvent) => {
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		if (password !== confirmPassword) {
