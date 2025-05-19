@@ -3,3 +3,7 @@ export interface Category {
 	title: string;
 	imageUrl: string;
 }
+
+export interface userAuthDetails {
+	displayName?: string;
+}
