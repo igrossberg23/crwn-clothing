@@ -1,5 +1,5 @@
 import CategoriesContainer from './components/CategoriesContainer/CategoriesContainer';
-import './App.css';
+import './App.scss';
 
 function App() {
 	const categories = [
