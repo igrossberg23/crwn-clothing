@@ -41,7 +41,15 @@ const SignInForm = () => {
 
 			console.log(userDocRef);
 			resetFormFields();
-		} catch (error) {
+		} catch (error: any) {
+			switch (error.code) {
+				case 'auth/wrong-password':
+				case 'auth/user-not-found':
+					alert('Sign in failed: Invalid credentials');
+					break;
+				default:
+					alert('Unknown error occurred');
+			}
 			console.log('Failed to log in...', error);
 		}
 	};
@@ -86,6 +94,7 @@ const SignInForm = () => {
 					<Button type='submit'>Sign In</Button>
 					<Button
 						buttonType='google'
+						type='button'
 						onClick={handleGoogleSignIn}>
 						Google Sign In
 					</Button>

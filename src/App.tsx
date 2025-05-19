@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.scss';
 import Home from './routes/home/Home';
 import Navigation from './routes/navigation/Navigation';
-import SignIn from './routes/sign-in/SignIn';
+import SignIn from './routes/authentication/Authentication';
 
 const Shop = () => {
 	return (
