@@ -18,3 +18,8 @@ export interface Product {
 export interface CartItem extends Product {
 	quantity: number;
 }
+
+export interface ShopCategory {
+	title: string;
+	items: Product[];
+}

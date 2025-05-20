@@ -22,7 +22,7 @@ function App() {
 						element={<Authentication />}
 					/>
 					<Route
-						path='shop'
+						path='shop/*'
 						element={<Shop />}
 					/>
 					<Route

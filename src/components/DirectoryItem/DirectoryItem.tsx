@@ -1,20 +1,20 @@
 import type { Category } from '../../types';
-import './CategoryItem.scss';
+import './DirectoryItem.scss';
 
-export interface CategoryItemProps {
+export interface DirectoryItemProps {
 	category: Category;
 }
 
-const CategoryItem = ({ category }: CategoryItemProps) => {
+const DirectoryItem = ({ category }: DirectoryItemProps) => {
 	const { title, imageUrl } = category;
 
 	return (
-		<div className='category-container'>
+		<div className='directory-item-container'>
 			<div
 				className='background-image'
 				style={{ backgroundImage: `url(${imageUrl})` }}
 			/>
-			<div className='category-body-container'>
+			<div className='body'>
 				<h2>{title}</h2>
 				<p> Shop Now</p>
 			</div>
@@ -22,4 +22,4 @@ const CategoryItem = ({ category }: CategoryItemProps) => {
 	);
 };
 
-export default CategoryItem;
+export default DirectoryItem;
