@@ -7,9 +7,10 @@ import { useContext } from 'react';
 export interface CartIconProps {}
 
 const CartIcon = ({}: CartIconProps) => {
-	const { setIsCartOpen } = useContext(CartContext);
+	const { setIsCartOpen, cartCount } = useContext(CartContext);
 
 	const toggleIsCartOpen = () => setIsCartOpen((prev) => !prev);
+
 	return (
 		<div
 			className='cart-icon-container'
@@ -19,7 +20,7 @@ const CartIcon = ({}: CartIconProps) => {
 				src={ShoppingBagIcon}
 				alt='Shopping bag icon'
 			/>
-			<span className='item-count'>24</span>
+			<span className='item-count'>{cartCount}</span>
 		</div>
 	);
 };
