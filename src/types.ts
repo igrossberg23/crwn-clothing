@@ -7,3 +7,10 @@ export interface Category {
 export interface userAuthDetails {
 	displayName?: string;
 }
+
+export interface Product {
+	id: number;
+	name: string;
+	imageUrl: string;
+	price: number;
+}

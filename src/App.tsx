@@ -3,14 +3,7 @@ import './App.scss';
 import Home from './routes/home/Home';
 import Navigation from './components/Navigation/Navigation';
 import Authentication from './routes/authentication/Authentication';
-
-const Shop = () => {
-	return (
-		<div>
-			<p>I am the shop</p>
-		</div>
-	);
-};
+import Shop from './routes/shop/Shop';
 
 function App() {
 	return (

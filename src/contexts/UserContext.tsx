@@ -15,11 +15,11 @@ export const UserContext = createContext<UserContextType>({
 	setCurrentUser: () => null,
 });
 
-interface UserContextProviderProps {
+interface UserProviderProps {
 	children: React.ReactNode;
 }
 
-export const UserProvider = ({ children }: UserContextProviderProps) => {
+export const UserProvider = ({ children }: UserProviderProps) => {
 	const [currentUser, setCurrentUser] = useState<User | null>(null);
 
 	useEffect(() => {
