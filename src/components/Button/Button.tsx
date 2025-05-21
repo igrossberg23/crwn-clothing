@@ -1,28 +1,31 @@
-import './Button.scss';
+import {
+	BaseButton,
+	GoogleSignInButton,
+	InvertedButton,
+} from './Button.styles';
 
-const BUTTON_TYPE_CLASSES: Record<string, string> = {
-	google: 'google-sign-in',
-	inverted: 'inverted',
-	default: '',
-};
+type ButtonTypeOption = 'google' | 'inverted' | 'base';
 
 export interface ButtonProps
 	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-	buttonType?: 'google' | 'inverted' | 'default';
+	buttonType?: ButtonTypeOption;
 }
+
+const getButton = (buttonType: ButtonTypeOption) =>
+	({
+		base: BaseButton,
+		google: GoogleSignInButton,
+		inverted: InvertedButton,
+	}[buttonType]);
 
 const Button = ({
 	children,
-	buttonType = 'default',
+	buttonType = 'base',
 	...otherProps
 }: ButtonProps) => {
-	return (
-		<button
-			className={`button-container ${BUTTON_TYPE_CLASSES[buttonType]}`}
-			{...otherProps}>
-			{children}
-		</button>
-	);
+	const CustomButton = getButton(buttonType);
+
+	return <CustomButton {...otherProps}>{children}</CustomButton>;
 };
 
 export default Button;

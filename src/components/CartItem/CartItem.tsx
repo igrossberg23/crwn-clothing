@@ -1,5 +1,5 @@
 import type { CartItem as CartItemType } from '../../types';
-import './CartItem.scss';
+import { CartItemContainer, ItemDetails, Name } from './CartItem.styles';
 
 export interface CartItemProps {
 	cartItem: CartItemType;
@@ -8,19 +8,18 @@ export interface CartItemProps {
 const CartItem = ({ cartItem }: CartItemProps) => {
 	const { name, quantity, imageUrl, price } = cartItem;
 	return (
-		<div className='cart-item-container'>
+		<CartItemContainer>
 			<img
-				className=''
 				src={imageUrl}
 				alt={name}
 			/>
-			<div className='item-details'>
-				<span className='name'>{name}</span>
+			<ItemDetails>
+				<Name>{name}</Name>
 				<span className='price'>
 					{quantity} x ${price}
 				</span>
-			</div>
-		</div>
+			</ItemDetails>
+		</CartItemContainer>
 	);
 };
 
