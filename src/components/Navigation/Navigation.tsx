@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { UserContext } from '../../contexts/UserContext';
+import { UserContext } from '../../contexts/User/UserContext';
 import { signOutUser } from '../../utils/firebase/firebase.utils';
 
 import CartIcon from '../CartIcon/CartIcon';
@@ -14,7 +14,7 @@ import {
 	NavLinks,
 	NavLink,
 } from './Navigation.styles';
-import { CartContext } from '../../contexts/CartContext';
+import { CartContext } from '../../contexts/Cart/CartContext';
 
 const Navigation = () => {
 	const { currentUser } = useContext(UserContext);

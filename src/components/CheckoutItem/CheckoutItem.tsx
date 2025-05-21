@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import type { CartItem } from '../../types';
-import { CartContext } from '../../contexts/CartContext';
+import { CartContext } from '../../contexts/Cart/CartContext';
 import {
 	Arrow,
 	CheckoutItemContainer,

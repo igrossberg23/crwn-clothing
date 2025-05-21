@@ -6,7 +6,7 @@ import {
 	EmptyMessage,
 	CartItems,
 } from './CartDropdown.styles';
-import { CartContext } from '../../contexts/CartContext';
+import { CartContext } from '../../contexts/Cart/CartContext';
 import { useNavigate } from 'react-router-dom';
 
 const CartDropdown = () => {

@@ -1,3 +1,7 @@
+import type { User } from 'firebase/auth';
+
+export type NullableUser = User | null;
+
 export interface Category {
 	id: number;
 	title: string;

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import type { Product } from '../../types';
 import Button from '../Button/Button';
-import { CartContext } from '../../contexts/CartContext';
+import { CartContext } from '../../contexts/Cart/CartContext';
 import {
 	Footer,
 	Name,

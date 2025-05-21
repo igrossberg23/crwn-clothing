@@ -9,7 +9,7 @@ export const CartIconContainer = styled.div`
 	justify-content: center;
 	cursor: pointer;
 
-	svg {
+	img {
 		height: 24px;
 		width: 24px;
 	}
