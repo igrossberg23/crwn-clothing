@@ -4,19 +4,13 @@ import { useDispatch } from 'react-redux';
 
 import CategoriesPreview from '../../components/CategoriesPreview/CategoriesPreview';
 import Category from '../../components/Category/Category';
-import { getCategoriesAndDocuments } from '../../utils/firebase/firebase.utils';
-import { setCategories } from '../../store/categories/category.action';
-import type { ShopCategory } from '../../types';
+import { fetchCategoriesAsync } from '../../store/categories/category.action';
 
 const Shop = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		const getCategoriesMap = async () => {
-			const categories = (await getCategoriesAndDocuments()) as ShopCategory[];
-			dispatch(setCategories(categories));
-		};
-		getCategoriesMap();
+		dispatch(fetchCategoriesAsync());
 	}, []);
 
 	return (

@@ -18,6 +18,11 @@ export const selectCategoriesMap = createSelector(
 		}, {})
 );
 
+export const selectCategoriesIsLoading = createSelector(
+	[selectCategoryReducer],
+	(categoriesSlice) => categoriesSlice.isLoading
+);
+
 // export const selectCategoriesMap = (state: any): CategoriesMap => {
 // 	const categories = state.categories.categoriesMap;
 // 	const categoryMap = categories.reduce(
