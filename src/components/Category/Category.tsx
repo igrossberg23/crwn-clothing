@@ -1,13 +1,15 @@
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import { useContext, useMemo } from 'react';
-import { CategoriesContext } from '../../contexts/CategoriesContext';
 import ProductCard from '../ProductCard/ProductCard';
 import { CategoryTitle, CategoryContainer } from './Category.styles';
+import { selectCategoriesMap } from '../../store/categories/category.selector';
+import { useMemo } from 'react';
+import type { Product } from '../../types';
 
 const Category = () => {
 	const { category } = useParams();
-	const { categoryMap } = useContext(CategoriesContext);
+	const categoryMap = useSelector(selectCategoriesMap);
 
 	const products = useMemo(() => {
 		if (!category || !(category in categoryMap)) return [];
@@ -19,7 +21,7 @@ const Category = () => {
 		<>
 			<CategoryTitle>{category?.toUpperCase()}</CategoryTitle>
 			<CategoryContainer>
-				{products.map((product) => (
+				{products.map((product: Product) => (
 					<ProductCard
 						key={product.id}
 						product={product}

@@ -1,13 +1,14 @@
-import { useContext } from 'react';
 import type { Product } from '../../types';
 import Button from '../Button/Button';
-import { CartContext } from '../../contexts/Cart/CartContext';
 import {
 	Footer,
 	Name,
 	Price,
 	ProductCardContainer,
 } from './ProductCard.styles';
+import { addItemToCart } from '../../store/cart/cart.action';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCartItems } from '../../store/cart/cart.selector';
 
 export interface ProductCardProps {
 	product: Product;
@@ -15,10 +16,11 @@ export interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
 	const { name, price, imageUrl } = product;
-	const { addItemToCart } = useContext(CartContext);
+	const cartItems = useSelector(selectCartItems);
+	const dispatch = useDispatch();
 
 	const addProductToCart = () => {
-		addItemToCart(product);
+		dispatch(addItemToCart(cartItems, product));
 	};
 
 	return (

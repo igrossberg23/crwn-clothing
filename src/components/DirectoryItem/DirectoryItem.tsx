@@ -20,7 +20,7 @@ const DirectoryItem = ({ category }: DirectoryItemProps) => {
 
 	return (
 		<DirectoryItemContainer onClick={clickHandler}>
-			<BackgroundImage imageUrl={imageUrl} />
+			<BackgroundImage imageurl={imageUrl} />
 			<Body>
 				<h2>{title}</h2>
 				<p> Shop Now</p>

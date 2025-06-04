@@ -21,13 +21,6 @@ export const CategoriesProvider = ({
 	children: React.ReactNode;
 }) => {
 	const [categoryMap, setCategoryMap] = useState<CategoryMap>({});
-	useEffect(() => {
-		const getCategoriesMap = async () => {
-			const categoryMap = await getCategoriesAndDocuments();
-			setCategoryMap(categoryMap);
-		};
-		getCategoriesMap();
-	}, []);
 
 	return (
 		<CategoriesContext.Provider value={{ categoryMap }}>

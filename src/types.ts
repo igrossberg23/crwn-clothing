@@ -28,3 +28,5 @@ export interface ShopCategory {
 	title: string;
 	items: Product[];
 }
+
+export type CategoriesMap = Record<string, Product[]>;
