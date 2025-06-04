@@ -12,7 +12,7 @@ import {
 	onAuthStateChangedListener,
 } from './utils/firebase/firebase.utils';
 import type { NullableUser } from './types';
-import { setCurrentUser } from './store/user/user.action';
+import { setCurrentUser } from './store/user/user.reducer';
 import { useDispatch } from 'react-redux';
 
 function App() {
@@ -22,7 +22,12 @@ function App() {
 		const unsubscribe = onAuthStateChangedListener((user: NullableUser) => {
 			if (user) createUserDocumentFromAuth(user);
 
-			dispatch(setCurrentUser(user));
+			const pickedUser =
+				user &&
+				(({ accessToken, email }) => {
+					accessToken, email;
+				})(user);
+			dispatch(setCurrentUser(pickedUser));
 		});
 
 		return unsubscribe;

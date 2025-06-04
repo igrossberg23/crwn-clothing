@@ -6,9 +6,8 @@ import {
 	Price,
 	ProductCardContainer,
 } from './ProductCard.styles';
-import { addItemToCart } from '../../store/cart/cart.action';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCartItems } from '../../store/cart/cart.selector';
+import { addItemToCart } from '../../store/cart/cart.reducer';
+import { useDispatch } from 'react-redux';
 
 export interface ProductCardProps {
 	product: Product;
@@ -16,11 +15,10 @@ export interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
 	const { name, price, imageUrl } = product;
-	const cartItems = useSelector(selectCartItems);
 	const dispatch = useDispatch();
 
 	const addProductToCart = () => {
-		dispatch(addItemToCart(cartItems, product));
+		dispatch(addItemToCart(product));
 	};
 
 	return (

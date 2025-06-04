@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import CategoriesPreview from '../../components/CategoriesPreview/CategoriesPreview';
 import Category from '../../components/Category/Category';
 import { getCategoriesAndDocuments } from '../../utils/firebase/firebase.utils';
-import { setCategories } from '../../store/categories/category.action';
+import { setCategories } from '../../store/categories/category.reducer';
 import type { ShopCategory } from '../../types';
 
 const Shop = () => {

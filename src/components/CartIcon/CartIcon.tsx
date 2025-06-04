@@ -3,7 +3,7 @@ import ShoppingBagIcon from '../../assets/shopping-bag.svg';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCartCount } from '../../store/cart/cart.selector';
-import { toggleIsCartOpen } from '../../store/cart/cart.action';
+import { toggleIsCartOpen } from '../../store/cart/cart.reducer';
 
 export interface CartIconProps {}
 
