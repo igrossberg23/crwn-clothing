@@ -1,10 +1,4 @@
-import {
-	compose,
-	legacy_createStore,
-	applyMiddleware,
-	type UnknownAction,
-	type Middleware,
-} from 'redux';
+import { compose, legacy_createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -14,6 +8,8 @@ import { rootReducer } from './root.reducer';
 import createSagaMiddleware from 'redux-saga';
 
 import { rootSaga } from './root-saga';
+
+const nodeEnv = import.meta.env.VITE_NODE_ENV;
 
 const persistConfig = {
 	key: 'root',
@@ -26,12 +22,12 @@ const sagaMiddleware = createSagaMiddleware();
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const middleWares = [
-	process.env.NODE_ENV === 'development' && logger,
+	nodeEnv === 'development' && logger,
 	sagaMiddleware,
 ].filter(Boolean);
 
 const composeEnhancer =
-	(process.env.NODE_ENV === 'development' &&
+	(nodeEnv === 'development' &&
 		window &&
 		window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
 	compose;
