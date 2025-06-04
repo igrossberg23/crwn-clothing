@@ -6,6 +6,11 @@ import {
 	signInWithGooglePopup,
 } from '../../utils/firebase/firebase.utils';
 import { ButtonsContainer, SignInContainer } from './SignInForm.styles';
+import { useDispatch } from 'react-redux';
+import {
+	emailSignInStart,
+	googleSignInStart,
+} from '../../store/user/user.action';
 
 const defaultFormFields = {
 	email: '',
@@ -15,6 +20,7 @@ const defaultFormFields = {
 const SignInForm = () => {
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { email, password } = formFields;
+	const dispatch = useDispatch();
 
 	const resetFormFields = () => setFormFields(defaultFormFields);
 
@@ -28,7 +34,7 @@ const SignInForm = () => {
 		event.preventDefault();
 
 		try {
-			await signInAuthUserWithEmailAndPassword(email, password);
+			dispatch(emailSignInStart(email, password));
 
 			resetFormFields();
 		} catch (error: any) {
@@ -45,11 +51,7 @@ const SignInForm = () => {
 	};
 
 	const handleGoogleSignIn = async () => {
-		try {
-			await signInWithGooglePopup();
-		} catch (error) {
-			console.log('Failed to log in with Google', error);
-		}
+		dispatch(googleSignInStart());
 	};
 
 	return (

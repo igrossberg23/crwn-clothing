@@ -1,4 +1,3 @@
-import type { UnknownAction } from 'redux';
 import type { ShopCategory } from '../../types';
 import { getCategoriesAndDocuments } from '../../utils/firebase/firebase.utils';
 import { createAction } from '../../utils/reducer/reducer.utils';
