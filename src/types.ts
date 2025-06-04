@@ -1,6 +1,8 @@
 import type { User } from 'firebase/auth';
 
-export type NullableUser = User | null;
+export type UserWithAuthToken = User & { accessToken?: string };
+
+export type NullableUser = UserWithAuthToken | null;
 
 export interface Category {
 	id: number;

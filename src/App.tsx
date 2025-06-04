@@ -22,11 +22,10 @@ function App() {
 		const unsubscribe = onAuthStateChangedListener((user: NullableUser) => {
 			if (user) createUserDocumentFromAuth(user);
 
-			const pickedUser =
-				user &&
-				(({ accessToken, email }) => {
-					accessToken, email;
-				})(user);
+			const pickedUser = user && {
+				email: user.email,
+				accessToken: user.accessToken,
+			};
 			dispatch(setCurrentUser(pickedUser));
 		});
 

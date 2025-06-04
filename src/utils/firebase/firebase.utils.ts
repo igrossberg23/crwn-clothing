@@ -7,7 +7,6 @@ import {
 	signInWithEmailAndPassword,
 	signOut,
 	onAuthStateChanged,
-	type User,
 } from 'firebase/auth';
 import {
 	getFirestore,
@@ -19,7 +18,7 @@ import {
 	query,
 	getDocs,
 } from 'firebase/firestore';
-import type { Product, ShopCategory, userAuthDetails } from '../../types';
+import type { NullableUser, ShopCategory, userAuthDetails } from '../../types';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -127,5 +126,5 @@ export const signInAuthUserWithEmailAndPassword = async (
 export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (
-	callback: (user: User | null) => void
+	callback: (user: NullableUser) => void
 ) => onAuthStateChanged(auth, callback);
