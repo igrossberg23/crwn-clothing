@@ -10,8 +10,8 @@ import {
 	selectCartItems,
 	selectCartTotal,
 } from '../../store/cart/cart.selector';
-import type { CartItem } from '../../types';
 import PaymentForm from '../../components/PaymentForm/PaymentForm';
+import type { CartItem } from '../../store/cart/cart.types';
 
 const Checkout = () => {
 	const cartItems = useSelector(selectCartItems);
