@@ -22,7 +22,7 @@ const Checkout = () => {
 			<CheckoutHeader>
 				{['Product', 'Description', 'Quantity', 'Price', 'Remove'].map(
 					(title) => (
-						<HeaderBlock>
+						<HeaderBlock key={title}>
 							<span>{title}</span>
 						</HeaderBlock>
 					)

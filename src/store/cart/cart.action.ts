@@ -17,6 +17,7 @@ const addCartItem = (
 	productToAdd: CategoryItem
 ): CartItem[] => {
 	let updatedItems;
+	if (!cartItems || !productToAdd) return [];
 
 	const existingItem = cartItems.find((item) => item.id === productToAdd.id);
 
@@ -45,6 +46,8 @@ const removeCartItem = (
 	cartItems: CartItem[],
 	itemToRemove: CartItem
 ): CartItem[] => {
+	if (!cartItems || !itemToRemove) return [];
+
 	if (itemToRemove.quantity < 2)
 		return cartItems.filter((item) => item.id !== itemToRemove.id);
 
