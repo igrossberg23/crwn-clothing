@@ -1,25 +1,49 @@
-import type { ShopCategory } from '../../types';
 import { getCategoriesAndDocuments } from '../../utils/firebase/firebase.utils';
-import { createAction } from '../../utils/reducer/reducer.utils';
-import { CATEGORY_ACTION_TYPES } from './category.types';
+import {
+	createAction,
+	type Action,
+	type ActionWithPayload,
+	withMatcher,
+} from '../../utils/reducer/reducer.utils';
+import { CATEGORY_ACTION_TYPES, type Category } from './category.types';
 
-export const setCategories = (categories: ShopCategory[]) =>
-	createAction(CATEGORY_ACTION_TYPES.SET_CATEGORIES, categories);
+export type FetchCategoriesStart =
+	Action<CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_START>;
 
-export const fetchCategoriesStart = () =>
-	createAction(CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_START);
+export type FetchCategoriesSuccess = ActionWithPayload<
+	CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS,
+	Category[]
+>;
 
-export const fetchCategoriesSuccess = (categories: ShopCategory[]) =>
-	createAction(CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS, categories);
+export type FetchCategoriesFailed = ActionWithPayload<
+	CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_FAILED,
+	Error
+>;
 
-export const fetchCategoriesFailed = (error: Error) =>
-	createAction(CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_FAILED, error);
+export type CategoryAction =
+	| FetchCategoriesStart
+	| FetchCategoriesSuccess
+	| FetchCategoriesFailed;
+
+export const fetchCategoriesStart = withMatcher(
+	(): FetchCategoriesStart =>
+		createAction(CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_START)
+);
+
+export const fetchCategoriesSuccess = withMatcher(
+	(categories: Category[]): FetchCategoriesSuccess =>
+		createAction(CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS, categories)
+);
+
+export const fetchCategoriesFailed = withMatcher(
+	(error: Error): FetchCategoriesFailed =>
+		createAction(CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_FAILED, error)
+);
 
 export const fetchCategoriesAsync = () => async (dispatch: any) => {
 	dispatch(fetchCategoriesStart());
 	try {
-		const categoriesArray =
-			(await getCategoriesAndDocuments()) as ShopCategory[];
+		const categoriesArray = (await getCategoriesAndDocuments()) as Category[];
 		dispatch(fetchCategoriesSuccess(categoriesArray));
 	} catch (error) {
 		dispatch(fetchCategoriesFailed(error as Error));

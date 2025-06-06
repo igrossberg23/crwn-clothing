@@ -1,34 +1,34 @@
-import type { CartItem } from '../../types';
-import { CART_ACTION_TYPES } from './cart.types';
+import type { UnknownAction } from 'redux';
+import { type CartItem } from './cart.types';
+import { setCartItems, toggleIsCartOpen } from './cart.action';
 
-interface CartReducerType {
-	cartItems: CartItem[];
-	isCartOpen: boolean;
-}
+export type CartState = {
+	readonly cartItems: CartItem[];
+	readonly isCartOpen: boolean;
+};
 
-export const CART_INITIAL_STATE = {
+export const CART_INITIAL_STATE: CartState = {
 	cartItems: [],
 	isCartOpen: false,
 };
 
 export const cartReducer = (
-	state: CartReducerType = CART_INITIAL_STATE,
-	action: { type: string; payload: any } = { type: '', payload: null }
+	state = CART_INITIAL_STATE,
+	action: UnknownAction
 ) => {
-	const { type, payload } = action;
-
-	switch (type) {
-		case CART_ACTION_TYPES.TOGGLE_IS_CART_OPEN:
-			return {
-				...state,
-				isCartOpen: !state.isCartOpen,
-			};
-		case CART_ACTION_TYPES.SET_CART_ITEMS:
-			return {
-				...state,
-				cartItems: payload,
-			};
-		default:
-			return state;
+	if (toggleIsCartOpen.match(action)) {
+		return {
+			...state,
+			isCartOpen: !state.isCartOpen,
+		};
 	}
+
+	if (setCartItems.match(action)) {
+		return {
+			...state,
+			cartItems: action.payload,
+		};
+	}
+
+	return state;
 };
