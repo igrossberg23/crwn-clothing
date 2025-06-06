@@ -9,12 +9,14 @@ import Checkout from './routes/checkout/Checkout';
 
 import { checkUserSession } from './store/user/user.action';
 import { useDispatch } from 'react-redux';
+import { fetchCategoriesStart } from './store/categories/category.action';
 
 function App() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(checkUserSession());
+		dispatch(fetchCategoriesStart());
 	}, []);
 
 	return (
