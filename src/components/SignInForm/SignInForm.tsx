@@ -1,16 +1,13 @@
-import { useState } from 'react';
+import { useState, type FormEvent, type ChangeEvent } from 'react';
 import FormInput from '../FormInput/FormInput';
 import Button from '../Button/Button';
-import {
-	signInAuthUserWithEmailAndPassword,
-	signInWithGooglePopup,
-} from '../../utils/firebase/firebase.utils';
 import { ButtonsContainer, SignInContainer } from './SignInForm.styles';
 import { useDispatch } from 'react-redux';
 import {
 	emailSignInStart,
 	googleSignInStart,
 } from '../../store/user/user.action';
+import { AuthErrorCodes, type AuthError } from 'firebase/auth';
 
 const defaultFormFields = {
 	email: '',
@@ -24,29 +21,30 @@ const SignInForm = () => {
 
 	const resetFormFields = () => setFormFields(defaultFormFields);
 
-	const handleChange = (event: any) => {
+	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
 
 		setFormFields((prev) => ({ ...prev, [name]: value }));
 	};
 
-	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		try {
 			dispatch(emailSignInStart(email, password));
 
 			resetFormFields();
-		} catch (error: any) {
-			switch (error.code) {
-				case 'auth/wrong-password':
-				case 'auth/user-not-found':
-					alert('Sign in failed: Invalid credentials');
-					break;
-				default:
-					alert('Unknown error occurred');
+		} catch (error) {
+			if (
+				(error as AuthError).code === AuthErrorCodes.INVALID_PASSWORD ||
+				(error as AuthError).code === AuthErrorCodes.INVALID_EMAIL ||
+				(error as AuthError).code === AuthErrorCodes.CREDENTIAL_MISMATCH
+			) {
+				alert('Incorrect email/password combination');
+			} else {
+				console.log({ error });
+				alert('Unknown error occurred');
 			}
-			console.log('Failed to log in...', error);
 		}
 	};
 

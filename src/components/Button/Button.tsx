@@ -1,3 +1,4 @@
+import { type FC, type ButtonHTMLAttributes } from 'react';
 import {
 	BaseButton,
 	ButtonSpinner,
@@ -7,20 +8,19 @@ import {
 
 type ButtonTypeOption = 'google' | 'inverted' | 'base';
 
-export interface ButtonProps
-	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-	buttonType?: ButtonTypeOption;
-	isLoading?: boolean;
-}
-
-const getButton = (buttonType: ButtonTypeOption) =>
+const getButton = (buttonType: ButtonTypeOption): typeof BaseButton =>
 	({
 		base: BaseButton,
 		google: GoogleSignInButton,
 		inverted: InvertedButton,
 	}[buttonType]);
 
-const Button = ({
+export type ButtonProps = {
+	buttonType?: ButtonTypeOption;
+	isLoading?: boolean;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
+
+const Button: FC<ButtonProps> = ({
 	children,
 	buttonType = 'base',
 	isLoading,

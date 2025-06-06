@@ -17,6 +17,13 @@ export type Category = {
 	items: CategoryItem[];
 };
 
+export type DirectoryCategory = {
+	id: number;
+	title: string;
+	imageUrl: string;
+	route: string;
+};
+
 export type CategoryMap = {
 	[key: string]: CategoryItem[];
 };

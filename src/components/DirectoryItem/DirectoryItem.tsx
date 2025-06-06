@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import type { Category } from '../../types';
 import {
 	DirectoryItemContainer,
 	Body,
 	BackgroundImage,
 } from './DirectoryItem.styles';
+import type { DirectoryCategory } from '../../store/categories/category.types';
 
 export interface DirectoryItemProps {
-	category: Category;
+	category: DirectoryCategory;
 }
 
 const DirectoryItem = ({ category }: DirectoryItemProps) => {

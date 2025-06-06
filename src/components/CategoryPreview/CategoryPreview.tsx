@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
-import type { Product } from '../../types';
 import ProductCard from '../ProductCard/ProductCard';
 import {
 	CategoryPreviewContainer,
 	Preview,
 	Title,
 } from './CategoryPreview.styles';
+import type { CategoryItem } from '../../store/categories/category.types';
 
-export interface CategoryPreviewProps {
+export type CategoryPreviewProps = {
 	title: string;
-	products: Product[];
-}
+	products: CategoryItem[];
+};
 
 const CategoryPreview = ({ title, products }: CategoryPreviewProps) => {
 	return (

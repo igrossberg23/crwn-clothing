@@ -1,4 +1,3 @@
-import type { CartItem } from '../../types';
 import {
 	Arrow,
 	CheckoutItemContainer,
@@ -15,10 +14,11 @@ import {
 } from '../../store/cart/cart.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCartItems } from '../../store/cart/cart.selector';
+import type { CartItem } from '../../store/cart/cart.types';
 
-export interface CheckoutItemProps {
+export type CheckoutItemProps = {
 	cartItem: CartItem;
-}
+};
 
 const CheckoutItem = ({ cartItem }: CheckoutItemProps) => {
 	const { name, quantity, price, imageUrl } = cartItem;

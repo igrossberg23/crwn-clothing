@@ -1,4 +1,3 @@
-import type { Product } from '../../types';
 import Button from '../Button/Button';
 import {
 	Footer,
@@ -9,9 +8,10 @@ import {
 import { addItemToCart } from '../../store/cart/cart.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCartItems } from '../../store/cart/cart.selector';
+import type { CategoryItem } from '../../store/categories/category.types';
 
 export interface ProductCardProps {
-	product: Product;
+	product: CategoryItem;
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {

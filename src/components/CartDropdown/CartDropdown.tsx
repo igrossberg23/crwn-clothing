@@ -8,7 +8,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCartItems } from '../../store/cart/cart.selector';
-import type { CartItem as CartItemType } from '../../types';
+import type { CartItem as CartItemType } from '../../store/cart/cart.types';
 
 const CartDropdown = () => {
 	const cartItems = useSelector(selectCartItems);

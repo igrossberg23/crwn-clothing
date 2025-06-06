@@ -8,17 +8,22 @@ import {
 	selectCategoriesMap,
 } from '../../store/categories/category.selector';
 import { useMemo } from 'react';
-import type { Product } from '../../types';
 import Spinner from '../Spinner/Spinner';
+import type { CategoryItem } from '../../store/categories/category.types';
+
+type CategoryRouteParams = {
+	category: string;
+};
 
 const Category = () => {
-	const { category } = useParams();
+	const { category } = useParams<
+		keyof CategoryRouteParams
+	>() as CategoryRouteParams;
+
 	const categoryMap = useSelector(selectCategoriesMap);
 	const isLoading = useSelector(selectCategoriesIsLoading);
 
 	const products = useMemo(() => {
-		if (!category || !(category in categoryMap)) return [];
-
 		return categoryMap[category];
 	}, [category, categoryMap]);
 
@@ -29,7 +34,7 @@ const Category = () => {
 				<Spinner />
 			) : (
 				<CategoryContainer>
-					{products.map((product: Product) => (
+					{products.map((product: CategoryItem) => (
 						<ProductCard
 							key={product.id}
 							product={product}
